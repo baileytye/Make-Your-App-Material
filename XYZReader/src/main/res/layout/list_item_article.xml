@@ -5,10 +5,11 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?selectableItemBackground"
+    app:cardCornerRadius="0dp"
     app:cardElevation="0dp">
 
     <LinearLayout
+        android:id="@+id/card_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -39,28 +40,36 @@
                 android:ellipsize="end"
                 android:maxLines="4"
                 android:paddingBottom="4dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/article_subtitle"
                 app:layout_constraintEnd_toStartOf="@+id/thumbnail"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
 
             <TextView
                 android:id="@+id/article_subtitle"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:textColor="#6000"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/article_title"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/article_title"
-                app:layout_constraintTop_toBottomOf="@+id/article_title" />
+                app:layout_constraintTop_toBottomOf="@+id/article_title"
+                app:layout_constraintVertical_chainStyle="packed" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/dividerHorizontal" />
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="?android:attr/dividerHorizontal" />-->
 
     </LinearLayout>
 

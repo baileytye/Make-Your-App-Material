@@ -7,9 +7,13 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.ColorUtils;
+import androidx.palette.graphics.Palette;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -19,8 +23,11 @@ import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
 import com.example.xyzreader.data.ItemsContract;
@@ -183,10 +190,29 @@ public class ArticleListActivity extends AppCompatActivity implements
                         + "<br/>" + " by "
                         + mCursor.getString(ArticleLoader.Query.AUTHOR)));
             }
-            holder.thumbnailView.setImageUrl(
-                    mCursor.getString(ArticleLoader.Query.THUMB_URL),
-                    ImageLoaderHelper.getInstance(ArticleListActivity.this).getImageLoader());
+
+            ImageLoader loader = ImageLoaderHelper.getInstance(ArticleListActivity.this).getImageLoader();
+            String image = mCursor.getString(ArticleLoader.Query.THUMB_URL);
+            holder.thumbnailView.setImageUrl(image, loader);
             holder.thumbnailView.setAspectRatio(mCursor.getFloat(ArticleLoader.Query.ASPECT_RATIO));
+            holder.thumbnailView.set
+
+            loader.get(image, new ImageLoader.ImageListener() {
+                @Override
+                public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+                    Bitmap bitmap = imageContainer.getBitmap();
+                    if (bitmap != null) {
+                        Palette p = Palette.from(bitmap).generate();
+                        int mMutedColor = p.getDarkMutedColor(0xFF424242);
+                        holder.cardLayout.setBackgroundColor(ColorUtils.blendARGB(mMutedColor, Color.BLACK, 0.0f));
+                    }
+                }
+
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+
+                }
+            });
         }
 
         @Override
@@ -199,12 +225,14 @@ public class ArticleListActivity extends AppCompatActivity implements
         public DynamicHeightNetworkImageView thumbnailView;
         public TextView titleView;
         public TextView subtitleView;
+        public LinearLayout cardLayout;
 
         public ViewHolder(View view) {
             super(view);
             thumbnailView = (DynamicHeightNetworkImageView) view.findViewById(R.id.thumbnail);
             titleView = (TextView) view.findViewById(R.id.article_title);
             subtitleView = (TextView) view.findViewById(R.id.article_subtitle);
+            cardLayout = view.findViewById(R.id.card_layout);
         }
     }
 }
