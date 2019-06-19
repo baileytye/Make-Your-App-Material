@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="4dp"
     android:clickable="true"
     android:focusable="true"
-    app:cardCornerRadius="0dp"
-    app:cardElevation="0dp">
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
 
     <LinearLayout
         android:id="@+id/card_layout"
@@ -18,13 +19,13 @@
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:padding="@dimen/list_item_layout_padding">
 
             <!--suppress AndroidLintContentDescription -->
             <com.example.xyzreader.ui.DynamicHeightNetworkImageView
                 android:id="@+id/thumbnail"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="@dimen/list_item_image_width"
+                android:layout_height="@dimen/list_item_image_width"
                 android:background="@color/photo_placeholder"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -36,10 +37,10 @@
                 style="@style/TextAppearance.AppCompat.Headline"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="@dimen/list_item_title_margin_end"
                 android:ellipsize="end"
                 android:maxLines="4"
-                android:paddingBottom="4dp"
+                android:paddingBottom="@dimen/list_item_text_margin"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/article_subtitle"
                 app:layout_constraintEnd_toStartOf="@+id/thumbnail"
@@ -53,7 +54,7 @@
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/list_item_text_margin"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:textColor="@color/white"
@@ -66,10 +67,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="1dp"-->
-            <!--android:background="?android:attr/dividerHorizontal" />-->
 
     </LinearLayout>
 

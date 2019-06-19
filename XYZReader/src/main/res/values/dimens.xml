@@ -9,9 +9,19 @@
     <dimen name="detail_collapsing_toolbar_layout_margin_start">72dp</dimen>
     <dimen name="detail_toolbar_elevation">2dp</dimen>
     <dimen name="detail_toolbar_margin_top">16dp</dimen>
+    <dimen name="details_body_margin_top">0dp</dimen>
 
     <dimen name="fab_elevation">2dp</dimen>
     <dimen name="fab_press_translation_z">6dp</dimen>
     <dimen name="fab_margin">24dp</dimen>
+
+    <dimen name="list_item_layout_padding">16dp</dimen>
+    <dimen name="list_item_image_width">120dp</dimen>
+    <dimen name="list_item_title_margin_end">8dp</dimen>
+    <dimen name="list_item_text_margin">4dp</dimen>
+    <dimen name="details_body_padding">16dp</dimen>
+    <dimen name="details_body_padding_top">24dp</dimen>
+    <dimen name="details_body_card_elevation">2dp</dimen>
+
 
 </resources>
