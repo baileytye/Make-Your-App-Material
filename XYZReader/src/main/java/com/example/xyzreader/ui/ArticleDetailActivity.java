@@ -12,9 +12,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.SharedElementCallback;
-import androidx.core.view.OnApplyWindowInsetsListener;
 import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.legacy.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import android.view.View;
@@ -101,24 +99,20 @@ public class ArticleDetailActivity extends AppCompatActivity
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(mPager,
-                new OnApplyWindowInsetsListener() {
-                    @Override
-                    public WindowInsetsCompat onApplyWindowInsets(View v,
-                                                                  WindowInsetsCompat insets) {
-                        insets = ViewCompat.onApplyWindowInsets(v, insets);
-                        if (insets.isConsumed()) {
-                            return insets;
-                        }
-
-                        boolean consumed = false;
-                        for (int i = 0, count = mPager.getChildCount(); i <  count; i++) {
-                            ViewCompat.dispatchApplyWindowInsets(mPager.getChildAt(i), insets);
-                            if (insets.isConsumed()) {
-                                consumed = true;
-                            }
-                        }
-                        return consumed ? insets.consumeSystemWindowInsets() : insets;
+                (v, insets) -> {
+                    insets = ViewCompat.onApplyWindowInsets(v, insets);
+                    if (insets.isConsumed()) {
+                        return insets;
                     }
+
+                    boolean consumed = false;
+                    for (int i = 0, count = mPager.getChildCount(); i <  count; i++) {
+                        ViewCompat.dispatchApplyWindowInsets(mPager.getChildAt(i), insets);
+                        if (insets.isConsumed()) {
+                            consumed = true;
+                        }
+                    }
+                    return consumed ? insets.consumeSystemWindowInsets() : insets;
                 });
     }
 
@@ -192,7 +186,7 @@ public class ArticleDetailActivity extends AppCompatActivity
 
 
     private class MyPagerAdapter extends FragmentStatePagerAdapter {
-        public MyPagerAdapter(FragmentManager fm) {
+        MyPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 

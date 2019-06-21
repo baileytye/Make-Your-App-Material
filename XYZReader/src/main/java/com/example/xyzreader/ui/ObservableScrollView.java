@@ -59,7 +59,7 @@ public class ObservableScrollView extends ScrollView {
         mCallbacks = listener;
     }
 
-    public static interface Callbacks {
-        public void onScrollChanged();
+    interface Callbacks {
+        void onScrollChanged();
     }
 }

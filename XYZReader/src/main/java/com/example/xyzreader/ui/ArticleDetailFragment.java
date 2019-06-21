@@ -49,7 +49,7 @@ public class ArticleDetailFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<Cursor> {
     private static final String TAG = "ArticleDetailFragment";
 
-    public static final String ARG_ITEM_ID = "item_id";
+    private static final String ARG_ITEM_ID = "item_id";
 
     private Cursor mCursor;
     private long mItemId;
@@ -58,15 +58,12 @@ public class ArticleDetailFragment extends Fragment implements
     private ImageView mPhotoView;
     private int mStartingPosition;
     private int mCurrentPosition;
-    private boolean mIsTransitioning;
 
-    private Toolbar mToolbar;
-
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
     // Use default locale format
-    private SimpleDateFormat outputFormat = new SimpleDateFormat();
+    private final SimpleDateFormat outputFormat = new SimpleDateFormat();
     // Most time functions can only handle 1902 - 2037
-    private GregorianCalendar START_OF_EPOCH = new GregorianCalendar(2,1,1);
+    private final GregorianCalendar START_OF_EPOCH = new GregorianCalendar(2,1,1);
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -95,12 +92,11 @@ public class ArticleDetailFragment extends Fragment implements
 
         mStartingPosition = getArguments().getInt(EXTRA_STARTING_ARTICLE_POSITION);
         mCurrentPosition = getArguments().getInt(EXTRA_CURRENT_ARTICLE_POSITION);
-        mIsTransitioning = savedInstanceState == null && mStartingPosition == mCurrentPosition;
 
         setHasOptionsMenu(true);
     }
 
-    public ArticleDetailActivity getActivityCast() {
+    private ArticleDetailActivity getActivityCast() {
         return (ArticleDetailActivity) getActivity();
     }
 
@@ -138,7 +134,7 @@ public class ArticleDetailFragment extends Fragment implements
             Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_article_details, container, false);
 
-        mToolbar = mRootView.findViewById(R.id.toolbar);
+        Toolbar mToolbar = mRootView.findViewById(R.id.toolbar);
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,12 +172,9 @@ public class ArticleDetailFragment extends Fragment implements
             return;
         }
 
-
-
         TextView titleView = mRootView.findViewById(R.id.article_title);
         TextView bylineView = mRootView.findViewById(R.id.article_byline);
         TextView bodyView = mRootView.findViewById(R.id.article_body);
-
 
         bodyView.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "Rosario-Regular.ttf"));
 
