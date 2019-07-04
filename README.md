@@ -1,4 +1,4 @@
-#XYZ Reader Starter Code
+# XYZ Reader Starter Code
 
 The goal of this project was to improve the design of an app.
 
